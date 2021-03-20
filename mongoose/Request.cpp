@@ -290,6 +290,10 @@ namespace Mongoose
       }
       return output;
     }
+    string Request::getRemoteAddr()
+    {
+	    return connection->remote_ip;
+    }
 
     void Request::handleUploads()
     {
