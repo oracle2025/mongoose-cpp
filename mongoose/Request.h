@@ -78,6 +78,7 @@ namespace Mongoose
 
 
             string getHeaderKeyValue(const std::string& header_key);
+            map<string, string> getAllHeaders();
 
             /**
              * Handle uploads to the target directory

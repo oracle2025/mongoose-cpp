@@ -282,6 +282,14 @@ namespace Mongoose
       }
       return output;
     }
+    map<string, string> Request::getAllHeaders() {
+      map<string, string> output;
+      for (int i=0; i<connection->num_headers; i++) {
+        const struct mg_connection::mg_header *header = &connection->http_headers[i];
+	output[header->name] = header->value;
+      }
+      return output;
+    }
 
     void Request::handleUploads()
     {
