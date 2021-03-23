@@ -1,4 +1,6 @@
 #pragma once
+#include <string.h>
+#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 
 #ifdef ENABLE_LOGGING
 #include <iostream>
@@ -8,4 +10,4 @@
 #define LOG(x)
 #endif
 
-#define TRACE_FUNCTION std::cout << (__FILE__) << ": " << (__LINE__) << ": " << (__PRETTY_FUNCTION__) << std::endl;
+#define TRACE_FUNCTION std::cout << (__FILENAME__) << ": " << (__LINE__) << ": " << (__PRETTY_FUNCTION__) << std::endl;
