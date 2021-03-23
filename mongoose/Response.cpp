@@ -28,7 +28,7 @@ namespace Mongoose
         string body = getBody();
         ostringstream data;
 
-        data << "HTTP/1.0 " << code << "\r\n";
+        data << "HTTP/1.1 " << code << "\r\n";
 
         if (!hasHeader("Content-Length")) {
             ostringstream length;
