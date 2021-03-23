@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (mongoose)
 find_package (Threads)
-
+add_definitions(-DENABLE_LOGGING)
 option (MAIN
     "Compile the main" OFF)
 
@@ -113,7 +113,7 @@ if (MAIN)
     add_executable (main main.c)
     target_link_libraries (main mongoose)
 endif (MAIN)
-        
+
 # Compiling tests
 if (EXAMPLES)
     add_executable (post examples/post.c)

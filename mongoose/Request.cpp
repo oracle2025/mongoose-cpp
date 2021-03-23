@@ -3,6 +3,7 @@
 #include <iostream>
 #include <mongoose.h>
 #include "Request.h"
+#include "Log.h"
 
 using namespace std;
 
@@ -96,6 +97,7 @@ namespace Mongoose
     Request::Request(struct mg_connection *connection_) :
         connection(connection_)
     {
+        TRACE_FUNCTION
         url = string(connection->uri);
         method = string(connection->request_method);
 
