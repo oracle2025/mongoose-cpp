@@ -7,6 +7,7 @@
 #ifdef WIN32
 #include <windows.h>
 #endif
+#include "Log.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ namespace Mongoose
 {
     string Utils::htmlEntities(string data)
     {
+        TRACE_FUNCTION
         string buffer;
         buffer.reserve(data.size());
 

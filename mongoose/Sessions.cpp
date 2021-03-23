@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "Sessions.h"
+#include "Log.h"
 
 using namespace std;
 
@@ -13,11 +14,13 @@ namespace Mongoose
     Sessions::Sessions(string key_) 
         : sessions(), key(key_)
     {
+        TRACE_FUNCTION
     }
 	
 	Sessions::~Sessions()
 	{
-		map<string, Session *>::iterator it;
+        TRACE_FUNCTION
+        map<string, Session *>::iterator it;
 		for (it=sessions.begin(); it!=sessions.end(); it++) {
 			delete (*it).second;
 		}
@@ -25,6 +28,7 @@ namespace Mongoose
 
     string Sessions::getId(Request &request, Response &response)
     {
+        TRACE_FUNCTION
         if (request.hasCookie(key)) {
             return request.getCookie(key);
         } else {
@@ -42,7 +46,8 @@ namespace Mongoose
     }
 
     Session &Sessions::get(Request &request, Response &response)
-    { 
+    {
+        TRACE_FUNCTION
         string id = getId(request, response);
 		Session *session = NULL;
         
@@ -60,6 +65,7 @@ namespace Mongoose
 
     void Sessions::garbageCollect(int oldAge)
     {
+        TRACE_FUNCTION
         vector<string> deleteList;
         map<string, Session*>::iterator it;
         vector<string>::iterator vit;

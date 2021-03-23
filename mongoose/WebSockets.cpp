@@ -1,5 +1,6 @@
 #include <iostream>
 #include "WebSockets.h"
+#include "Log.h"
 
 
 namespace Mongoose
@@ -7,10 +8,12 @@ namespace Mongoose
     WebSockets::WebSockets(bool responsible_)
         : responsible(responsible_), id(0)
     {
+        TRACE_FUNCTION
     }
 
     WebSockets::~WebSockets()
     {
+        TRACE_FUNCTION
         if (responsible) {
             vector<WebSocket *> toDelete;
 
@@ -30,6 +33,7 @@ namespace Mongoose
 
     void WebSockets::add(WebSocket *websocket)
     {
+        TRACE_FUNCTION
         if (websocket == NULL) {
             return;
         }
@@ -55,6 +59,7 @@ namespace Mongoose
 
     WebSocket *WebSockets::getWebSocket(int id)
     {
+        TRACE_FUNCTION
         if (websocketsById.find(id) != websocketsById.end()) {
             return websocketsById[id];
         }
@@ -64,6 +69,7 @@ namespace Mongoose
 
     void WebSockets::sendAll(string data)
     {
+        TRACE_FUNCTION
         vector<WebSocket *> toClean;
         map<struct mg_connection *, WebSocket *>::iterator it;
 
@@ -80,6 +86,7 @@ namespace Mongoose
 
     void WebSockets::remove(WebSocket *websocket, bool lock)
     {
+        TRACE_FUNCTION
         struct mg_connection *connection = websocket->getConnection();
 
         if (lock) {
@@ -103,6 +110,7 @@ namespace Mongoose
 
     WebSocket *WebSockets::getWebSocket(struct mg_connection *connection)
     {
+        TRACE_FUNCTION
         if (websockets.find(connection) != websockets.end()) {
             return websockets[connection];
         }
@@ -112,6 +120,7 @@ namespace Mongoose
 
     void WebSockets::clean()
     {
+        TRACE_FUNCTION
         vector<WebSocket *> toDelete;
         map<struct mg_connection *, WebSocket *>::iterator it;
 

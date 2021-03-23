@@ -109,16 +109,19 @@ namespace Mongoose
 
     string Request::getUrl()
     {
+        TRACE_FUNCTION
         return url;
     }
 
     string Request::getMethod()
     {
+        TRACE_FUNCTION
         return method;
     }
 
     string Request::getData()
     {
+        TRACE_FUNCTION
         return data;
     }
 
@@ -137,6 +140,7 @@ namespace Mongoose
 
     void Request::writeResponse(Response *response)
     {
+        TRACE_FUNCTION
         string data = response->getData();
 
         mg_write(connection, data.c_str(), data.size());
@@ -144,6 +148,7 @@ namespace Mongoose
 
     bool Request::hasVariable(string key)
     {
+        TRACE_FUNCTION
         const char *dataField;
         char dummy[10];
 
@@ -158,6 +163,7 @@ namespace Mongoose
 
     map<string, string> Request::getAllVariable()
     {
+        TRACE_FUNCTION
         map<string, string> mapKeyValue;
         stringstream ss(data);
         string param;
@@ -171,6 +177,7 @@ namespace Mongoose
 
     bool Request::readVariable(const char *data, string key, string &output)
     {
+        TRACE_FUNCTION
         int size = 1024, ret;
         char *buffer = new char[size];
 
@@ -197,6 +204,7 @@ namespace Mongoose
 
     string Request::get(string key, string fallback)
     {
+        TRACE_FUNCTION
         const char *dataField;
         string output;
 
@@ -217,6 +225,7 @@ namespace Mongoose
 
     bool Request::hasCookie(string key)
     {
+        TRACE_FUNCTION
         int i;
         char dummy[10];
 
@@ -235,6 +244,7 @@ namespace Mongoose
 
     string Request::getCookie(string key, string fallback)
     {
+        TRACE_FUNCTION
         string output;
         int i;
         int size = 1024;
@@ -274,7 +284,8 @@ namespace Mongoose
     }
 
     string Request::getHeaderKeyValue(const std::string& header_key) {
-      string output;
+        TRACE_FUNCTION
+        string output;
       for (int i=0; i<connection->num_headers; i++) {
         const struct mg_connection::mg_header *header = &connection->http_headers[i];
         if (strcmp(header->name, header_key.c_str()) == 0) {
@@ -285,7 +296,8 @@ namespace Mongoose
       return output;
     }
     map<string, string> Request::getAllHeaders() {
-      map<string, string> output;
+        TRACE_FUNCTION
+        map<string, string> output;
       for (int i=0; i<connection->num_headers; i++) {
         const struct mg_connection::mg_header *header = &connection->http_headers[i];
 	output[header->name] = header->value;
@@ -294,11 +306,13 @@ namespace Mongoose
     }
     string Request::getRemoteAddr()
     {
-	    return connection->remote_ip;
+        TRACE_FUNCTION
+        return connection->remote_ip;
     }
 
     void Request::handleUploads()
     {
+        TRACE_FUNCTION
         char var_name[1024];
         char file_name[1024];
         const char *data;

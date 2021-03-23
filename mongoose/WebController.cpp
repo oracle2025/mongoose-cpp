@@ -1,5 +1,6 @@
 #include "WebController.h"
 #include "Session.h"
+#include "Log.h"
 
 namespace Mongoose
 {        
@@ -9,11 +10,13 @@ namespace Mongoose
         gcDivisor(gcDivisor_),
         counter(0)
     {
+        TRACE_FUNCTION
     }
 
     void WebController::preProcess(Request &request, Response &response)
     {
         mutex.lock();
+        TRACE_FUNCTION
         counter++;
 
         if (counter > gcDivisor) {

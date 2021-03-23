@@ -8,4 +8,4 @@
 #define LOG(x)
 #endif
 
-#define TRACE_FUNCTION LOG(__PRETTY_FUNCTION__)
+#define TRACE_FUNCTION std::cout << (__FILE__) << ": " << (__LINE__) << ": " << (__PRETTY_FUNCTION__) << std::endl;

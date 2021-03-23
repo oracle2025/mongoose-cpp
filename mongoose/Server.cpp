@@ -10,6 +10,7 @@
 #include <iostream>
 #include "Server.h"
 #include "Utils.h"
+#include "Log.h"
 
 using namespace std;
 using namespace Mongoose;
@@ -84,6 +85,7 @@ namespace Mongoose
 #endif
 
     {
+        TRACE_FUNCTION
         ostringstream portOss;
         portOss << port;
         optionsMap["listening_port"] = portOss.str();
@@ -93,11 +95,13 @@ namespace Mongoose
 
     Server::~Server()
     {
+        TRACE_FUNCTION
         stop();
     }
 
     void Server::start()
     {
+        TRACE_FUNCTION
         if (server == NULL) {
 #ifdef ENABLE_STATS
             requests = 0;
@@ -122,6 +126,7 @@ namespace Mongoose
 
     void Server::poll()
     {
+        TRACE_FUNCTION
 #ifndef NO_WEBSOCKET
         unsigned int current_timer = 0;
 #endif
@@ -138,6 +143,7 @@ namespace Mongoose
 
     void Server::stop()
     {
+        TRACE_FUNCTION
         stopped = true;
         while (!destroyed) {
             Utils::sleep(100);
@@ -146,6 +152,7 @@ namespace Mongoose
 
     void Server::registerController(Controller *controller)
     {
+        TRACE_FUNCTION
         controller->setSessions(&sessions);
         controller->setServer(this);
         controller->setup();
@@ -192,6 +199,7 @@ namespace Mongoose
 
     int Server::_handleRequest(struct mg_connection *conn)
     {
+        TRACE_FUNCTION
         Request request(conn);
 
         mutex.lock();
@@ -215,6 +223,7 @@ namespace Mongoose
 
     bool Server::handles(string method, string url)
     {
+        TRACE_FUNCTION
 #ifndef NO_WEBSOCKET
         if (url == "/websocket") {
             return true;
@@ -233,6 +242,7 @@ namespace Mongoose
 
     Response *Server::handleRequest(Request &request)
     {
+        TRACE_FUNCTION
         Response *response;
         vector<Controller *>::iterator it;
 
@@ -254,6 +264,7 @@ namespace Mongoose
 
     void Server::setOption(string key, string value)
     {
+        TRACE_FUNCTION
         optionsMap[key] = value;
     }
 
@@ -266,6 +277,7 @@ namespace Mongoose
 
     void Server::printStats()
     {
+        TRACE_FUNCTION
         int delta = getTime()-startTime;
 
         if (delta) {

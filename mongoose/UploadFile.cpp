@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iostream>
 #include "UploadFile.h"
+#include "Log.h"
 
 using namespace std;
 
@@ -11,20 +12,24 @@ namespace Mongoose
         : filename(filename_),
         data(data_)
     {
+        TRACE_FUNCTION
     }
 
     string UploadFile::getName()
     {
+        TRACE_FUNCTION
         return filename;
     }
 
     string UploadFile::getData()
     {
+        TRACE_FUNCTION
         return data;
     }
     
     void UploadFile::saveTo(string directory)
     {
+        TRACE_FUNCTION
         ostringstream oss;
         oss << directory << "/" << filename;
         fstream file;
