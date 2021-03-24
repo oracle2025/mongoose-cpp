@@ -2,6 +2,8 @@ cmake_minimum_required (VERSION 2.6)
 project (mongoose)
 find_package (Threads)
 add_definitions(-DENABLE_LOGGING)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option (MAIN
     "Compile the main" OFF)
 

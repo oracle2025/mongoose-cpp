@@ -22,7 +22,7 @@ static int mg_strncasecmp(const char *s1, const char *s2, size_t len) {
   return diff;
 }
 
-static void mg_strlcpy(register char *dst, register const char *src, size_t n) {
+static void mg_strlcpy(char *dst, const char *src, size_t n) {
   for (; *src != '\0' && n > 1; n--) {
     *dst++ = *src++;
   }

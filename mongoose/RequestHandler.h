@@ -11,6 +11,7 @@ namespace Mongoose
     {
         public:
             virtual Response *process(Request &request)=0;
+            virtual ~RequestHandlerBase()=default;
     };
 
     template<typename T, typename R>
